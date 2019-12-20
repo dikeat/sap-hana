@@ -46,15 +46,15 @@
     state: latest
     executable: pip3
 
-#- name: Download installation media
-#  shell: "python3 {{ sap_media_download_script_loc }}/python/downloader/basket.py --config /home/{{ ansible_user}}/output.json --dir {{ azure_files_mount_path }}"
+- name: Download installation media
+  shell: "python3 {{ sap_media_download_script_loc }}/python/downloader/basket.py --config /home/{{ ansible_user}}/output.json --dir {{ azure_files_mount_path }}"
 
-#- name: Identify media archive
-#  shell: "ls {{ azure_files_mount_path }}/DB|grep ZIP"
-#  register: bits_file
+- name: Identify media archive
+  shell: "ls {{ azure_files_mount_path }}/DB|grep ZIP"
+  register: bits_file
 
-#- name: Extract media archive
-#  unarchive: 
-#    src: "{{ azure_files_mount_path }}/DB/{{bits_file.stdout}}"
-#    dest: "{{ azure_files_mount_path }}/DB"
-#    remote_src: yes
+- name: Extract media archive
+  unarchive: 
+    src: "{{ azure_files_mount_path }}/DB/{{bits_file.stdout}}"
+    dest: "{{ azure_files_mount_path }}/DB"
+    remote_src: yes

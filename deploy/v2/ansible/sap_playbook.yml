@@ -43,10 +43,8 @@
   become: true
   become_user: root
   roles:
-   - { role: sap-media-download }
+#   - { role: sap-media-download }
 
-- hosts: jumpboxes_windows
-  pre_tasks:
-    - win_ping:
+- hosts: all_jumpboxes
   roles:
     - { role: jumpbox-install }  
