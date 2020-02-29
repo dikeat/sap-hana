@@ -51,6 +51,7 @@ module "output_files" {
   jumpboxes                    = var.jumpboxes
   databases                    = var.databases
   software                     = var.software
+  options                      = var.options
   storage-sapbits              = module.common_infrastructure.storage-sapbits
   nics-jumpboxes-windows       = module.jumpbox.nics-jumpboxes-windows
   nics-jumpboxes-linux         = module.jumpbox.nics-jumpboxes-linux
@@ -61,7 +62,7 @@ module "output_files" {
 }
 
 resource "null_resource" "ansible_playbook" {
-  depends_on = [module.hdb_node.dbnodes, module.jumpbox.prepare-rti]
+  depends_on = [module.hdb_node.dbnodes, module.jumpbox.prepare-rti, module.jumpbox.vm-windows]
   connection {
     type        = "ssh"
     host        = module.jumpbox.rti-info.public_ip_address
